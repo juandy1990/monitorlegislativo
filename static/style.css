@@ -1,21 +1,16 @@
 body {
   font-family: Arial, sans-serif;
   text-align: center;
-  background: #f4f4f4;
+  background: url('/static/congreso.jpg') no-repeat center center fixed;
+  background-size: cover;
+  color: white;
   padding: 30px;
 }
-h1 {
-  color: #333;
-}
-.descripcion {
-  margin-bottom: 30px;
-  font-size: 1.2em;
-}
-.botones {
-  display: flex;
-  justify-content: center;
-  gap: 40px;
-  margin: 20px 0;
+h1, .descripcion, .resultados {
+  background: rgba(0,0,0,0.6); /* Fondo oscuro semitransparente para legibilidad */
+  display: inline-block;
+  padding: 10px 20px;
+  border-radius: 8px;
 }
 button {
   font-size: 1.5em;
@@ -35,9 +30,4 @@ button {
 }
 button:hover {
   transform: scale(1.05);
-}
-.resultados {
-  margin-top: 40px;
-  font-size: 1.3em;
-  font-weight: bold;
 }
