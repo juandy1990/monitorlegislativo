@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Juicio Político: Noelia Cabrera</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <h1>Juicio Político: Caso Nepotismo - Senadora Noelia Cabrera</h1>
+  <p class="descripcion">¿Condena o salvación? ¡Participa votando!</p>
+
+  <div class="botones">
+    <button class="condena" onclick="votar('condena')">Por la Condena</button>
+    <button class="salvacion" onclick="votar('salvacion')">Por la Salvación</button>
+  </div>
+
+  <div class="resultados">
+    Condena: <span id="contadorCondena">0</span> votos<br>
+    Salvación: <span id="contadorSalvacion">0</span> votos
+  </div>
+
+  <!-- Audios -->
+  <audio id="audioCondena" src="/static/condena.wav"></audio>
+  <audio id="audioSalvacion" src="/static/rechazo.wav"></audio>
+
+  <script>
+    async function cargarVotos() {
+      const res = await fetch("/votos");
+      const data = await res.json();
+      document.getElementById("contadorCondena").textContent = data.condena;
+      document.getElementById("contadorSalvacion").textContent = data.salvacion;
+    }
+
+    async function votar(opcion) {
+      if (opcion === "condena") {
+        document.getElementById("audioCondena").play();
+      } else {
+        document.getElementById("audioSalvacion").play();
+      }
+
+      await fetch("/votar", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ opcion })
+      });
+      cargarVotos();
+    }
+
+    cargarVotos();
+  </script>
+</body>
+</html>
